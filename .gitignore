@@ -73,3 +73,4 @@ venv.bak/
 dmypy.json
 .pyre/
 .idea
+.vscode
