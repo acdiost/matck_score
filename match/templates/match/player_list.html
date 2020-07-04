@@ -1,0 +1,19 @@
+{% extends 'common/base.html' %}
+
+{% block base %}
+{% load static %}
+展示选手信息
+<div class="row row-cols-1 row-cols-md-2">
+{% for player in players %}
+  <div class="col mb-4">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{ player.player_name }}</h5>
+        <p class="card-text">选手信息简介</p>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+{% endblock %}

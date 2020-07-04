@@ -74,3 +74,4 @@ dmypy.json
 .pyre/
 .idea
 .vscode
+/static

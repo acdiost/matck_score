@@ -1,0 +1,18 @@
+{% extends 'common/base.html' %}
+
+{% block base %}
+{% load static %}
+评委登录页，登录成功才允许评分
+<form method='POST' action='{% url 'match:login' %}'>
+{% csrf_token %}
+  <div class="form-group">
+    <label for="username">评委姓名</label>
+    <input type="" class="form-control" name='username' id="username">
+  </div>
+  <div class="form-group">
+    <label for="password">密码</label>
+    <input type="password" class="form-control" name='password' id="password">
+  </div>
+  <button type="submit" class="btn btn-primary">登录</button>
+</form>
+{% endblock %}

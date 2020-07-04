@@ -15,7 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from . import views
+
+app_name = 'match'
 
 urlpatterns = [
-
+    path(r'', views.IndexView.as_view(), name='index'),
+    path(r'player/', views.PlayerView.as_view(), name='player'),
+    path(r'judge', views.JudgeView.as_view(), name='judge'),
+    path(r'score', views.ScoreView.as_view(), name='score'),
+    path(r'sort', views.SortView.as_view(), name='sort'),
+    path(r'login', views.login, name='login'),
+    path(r'logout', views.logout, name='logout'),
 ]

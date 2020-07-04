@@ -1,6 +1,7 @@
+{% load static %}
 <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="/">
-        <img src="" alt="logo">
+        <img src="{% static 'match/images/logo.png' %}" alt="logo">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,10 +15,22 @@
                 <a class="nav-link" href="/admin/" target="_blank">后台管理 <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'xuanshou:index' %}">选手</a>
+                <a class="nav-link" href="{% url 'match:index' %}">首页</a>
+            </li>     
+            {% comment %} <li class="nav-item active">
+                <a class="nav-link" href="{% url 'match:judge' %}">评委</a>
+            </li>     
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'match:player' %}">选手</a>
+            </li> {% endcomment %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'match:score' %}">评分</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'pingwei:index' %}">评委</a>
+                <a class="nav-link" href="{% url 'match:sort' %}">排名</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'match:login' %}">评委登录</a>
             </li>
         </ul>
     </div>

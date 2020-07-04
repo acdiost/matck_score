@@ -35,9 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pingwei.apps.PingweiConfig',
     'polls.apps.PollsConfig',
-    'xuanshou.apps.XuanshouConfig',
+    'match.apps.MatchConfig',
 ]
 
 MIDDLEWARE = [
@@ -117,7 +116,7 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'common/static'), ]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'templates/static'), ]
 
 # 时间格式化
 DATETIME_FORMAT = 'Y-m-d H:i:s'
