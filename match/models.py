@@ -32,7 +32,8 @@ class Grades(models.Model):
     player_id = models.ForeignKey(to=Player, on_delete=models.CASCADE)
     judge_id = models.ForeignKey(to=Judges, on_delete=models.CASCADE)
     score = models.FloatField('评委评分', default=0)
-    rounds = models .IntegerField('场次')
+    # 0 未评分，1 已评分
+    rounds = models .IntegerField('是否评分', default=0)
 
     class Meta:
         app_label = 'match'

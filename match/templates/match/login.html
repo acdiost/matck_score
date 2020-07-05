@@ -3,15 +3,20 @@
 {% block base %}
 {% load static %}
 评委登录页，登录成功才允许评分
+
+{% if message %}
+    <div class="alert alert-warning">{{ message }}</div>
+{% endif %}
+
 <form method='POST' action='{% url 'match:login' %}'>
 {% csrf_token %}
   <div class="form-group">
     <label for="username">评委姓名</label>
-    <input type="" class="form-control" name='username' id="username">
+    <input type="" class="form-control" name='username' id="username" required>
   </div>
   <div class="form-group">
     <label for="password">密码</label>
-    <input type="password" class="form-control" name='password' id="password">
+    <input type="password" class="form-control" name='password' id="password" required>
   </div>
   <button type="submit" class="btn btn-primary">登录</button>
 </form>

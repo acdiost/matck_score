@@ -1,9 +1,9 @@
 {% extends 'common/base.html' %}
 
 {% block base %}
-评分页，评委登录成功后选择相应场次和选手进行打分
-<form method='post' action=''>
-{% csrf_token %}
+{% if request.session.is_login %}
+  <form method='post' action=''>
+  {% csrf_token %}
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">
 30秒个人视频风采展示
@@ -30,17 +30,21 @@
   </div>
     <div class="form-group row col-md-4">
       <label for="inputState">请选择选手</label>
-      <select id="inputState" class="form-control">
+      <select id="inputState" class="form-control" name='player_id'>
         <option selected>请选择...</option>
         {% for player in players %}
         <option value="{{player.id}}">{{ player.player_name }}</option>
         {% endfor %}
       </select>
     </div>
+    <input type="hidden" name='judge_id' value='{{request.session.judge_id}}'/>
   <div class="form-group row">
     <div class="col-sm-10  pull-right">
       <button type="submit" class="btn btn-primary">提交</button>
     </div>
   </div>
 </form>
+{% else %}
+  <a class="btn btn-primary" href="/login" role="button">点我登录后评分</a>
+{% endif %}
 {% endblock %}
