@@ -2,31 +2,23 @@
 
 {% block base %}
 {% load static %}
-排名页，展示选手的排名信息
+<div class="alert alert-warning">总分数 = 11位评委评分的总和 减去 最大分数 及 最小分数 除以 9</div>
 <table class="table table-hover">
   <thead>
     <tr>
-      <th scope="col">排名</th>
+      {% comment %} <th scope="col">排名</th> {% endcomment %}
       <th scope="col">选手姓名</th>
       <th scope="col">得分</th>
     </tr>
   </thead>
   <tbody>
+{% for sort in sorts %}
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>@mdo</td>
+      {% comment %} <th scope="row">{{ sort.index }}</th> {% endcomment %}
+      <td>{{ sort.player_name }}</td>
+      <td>{{ sort.score }}</td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry the Bird</td>
-      <td>Larry the Bird</td>
-    </tr>
+{% endfor %}
   </tbody>
 </table>
 {% endblock %}

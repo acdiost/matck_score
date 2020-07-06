@@ -2,6 +2,7 @@ from django.db import models
 
 # 评委
 class Judges(models.Model):
+    judge_id = models.PositiveIntegerField(verbose_name="评委id", blank=False, null=False)
     judge_name = models.CharField('评委姓名', max_length=20)
     judge_password = models.CharField('密码', max_length=30)
 
@@ -17,6 +18,7 @@ class Judges(models.Model):
 
 # 选手
 class Player(models.Model):
+    player_id = models.PositiveIntegerField(verbose_name="选手id", blank=False, null=False)
     player_name = models.CharField('选手姓名', max_length=20)
 
     class Meta:
@@ -29,11 +31,11 @@ class Player(models.Model):
 
 # 选手得分及场次
 class Grades(models.Model):
-    player_id = models.ForeignKey(to=Player, on_delete=models.CASCADE)
-    judge_id = models.ForeignKey(to=Judges, on_delete=models.CASCADE)
+    player_name = models.CharField(verbose_name="选手姓名",  max_length=20, blank=False, null=False)
+    judge_id = models.PositiveIntegerField(verbose_name="评委id", blank=False, null=False)
     score = models.FloatField('评委评分', default=0)
     # 0 未评分，1 已评分
-    rounds = models .IntegerField('是否评分', default=0)
+    rated = models .PositiveIntegerField('是否评分', default=0)
 
     class Meta:
         app_label = 'match'

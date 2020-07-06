@@ -1,6 +1,9 @@
 {% extends 'common/base.html' %}
 
 {% block base %}
+{% if message %}
+    <div class="alert alert-warning">{{ message }}</div>
+{% endif %}
 {% if request.session.is_login %}
   <form method='post' action=''>
   {% csrf_token %}
@@ -30,10 +33,9 @@
   </div>
     <div class="form-group row col-md-4">
       <label for="inputState">请选择选手</label>
-      <select id="inputState" class="form-control" name='player_id'>
-        <option selected>请选择...</option>
+      <select id="inputState" class="form-control" name='player_name'>
         {% for player in players %}
-        <option value="{{player.id}}">{{ player.player_name }}</option>
+        <option value="{{player.player_name}}">{{ player.player_name }}</option>
         {% endfor %}
       </select>
     </div>
@@ -45,6 +47,6 @@
   </div>
 </form>
 {% else %}
-  <a class="btn btn-primary" href="/login" role="button">点我登录后评分</a>
+  <a class="btn btn-success" href="/login" role="button">点我登录后评分</a>
 {% endif %}
 {% endblock %}
