@@ -38,7 +38,7 @@ class SortView(generic.ListView):
     context_object_name = 'sorts'
 
     def get_queryset(self):
-        return Grades.objects.raw('SELECT id, player_name, (sum(score) - max(score) - min(score)) / 9 AS score FROM match_grades group by player_name order by score desc')
+        return Grades.objects.raw('SELECT id, player_name, round((sum(score) - max(score) - min(score)) / 9, 2) AS score FROM match_grades group by player_name order by score desc')
 
 
 def score(request):
@@ -50,19 +50,19 @@ def score(request):
         judge_id = request.POST.get('judge_id', None)
         player_name = request.POST.get('player_name', None)
         try:
-            tmp = Grades.objects.get(player_name=player_name, judge_id=judge_id, rated=1)
-            if tmp is not None:
+            if Grades.objects.get(player_name=player_name, judge_id=judge_id, rated=1) is not None:
                 message = '选手已评分'
                 players = Player.objects.all()
                 return render(request, 'match/score.html', {"players": players, "message": message})
         except Grades.DoesNotExist:
-            logger.error(f'数据库分数表初始化')
-            pass
-        logger.error(f'------------------------风采分数：{fengcai},快口分数：{kuaikou},带货分数：{daihuo}, 评委id：{judge_id}, 选手姓名：{player_name}')
-        score = int(fengcai) + int(kuaikou) + int(daihuo)
-        grade = Grades(player_name=player_name, judge_id=judge_id, score=score, rated=1)
-        logger.error(f'------------------------三项分数和：{score}')
-        grade.save()
+            logger.error(f'------------------------风采分数：{fengcai},快口分数：{kuaikou},带货分数：{daihuo}, 评委id：{judge_id}, 选手姓名：{player_name}')
+            score = float(fengcai) + float(kuaikou) + float(daihuo)
+            grade = Grades(player_name=player_name, judge_id=judge_id, score=score, rated=1)
+            logger.error(f'------------------------三项分数和：{score}')
+            grade.save()
+            message = "评分成功！"
+        players = Player.objects.all()
+        return render(request, 'match/score.html', {"players": players, "message":message})
     players = Player.objects.all()
     return render(request, 'match/score.html', {"players": players})
 
